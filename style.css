@@ -1,0 +1,254 @@
+/* 颜色取自《丧尸突围》本身：荒野草地的地面绿、墙顶灰、USP 子弹的黄色 */
+@font-face {
+  font-family: "Smiley Sans";
+  src: url("fonts/smiley.woff2") format("woff2");
+  font-display: swap;
+}
+
+:root {
+  --ground: #2f3b29;     /* 游戏屏幕区背景，比游戏地面略深 */
+  --ground-2: #3c4a34;   /* 游戏地面原色 */
+  --page: #eceee8;       /* 页面底色：偏冷的灰绿，像墙顶的水泥 */
+  --ink: #1e2619;        /* 正文 */
+  --muted: #5b6455;      /* 次要文字 */
+  --bullet: #ffe08a;     /* 强调：子弹黄 */
+  --line: #c9cdc2;
+
+  --display: "Smiley Sans", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --body: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+
+  /* 字号阶梯：基于 17px，按 1.25 倍递增 */
+  --s-1: 0.875rem;
+  --s0: 1.0625rem;
+  --s1: 1.33rem;
+  --s2: 1.66rem;
+  --s3: 2.6rem;
+  --s4: clamp(3.4rem, 9vw, 6.5rem);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font: 400 var(--s0)/1.75 var(--body);
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+a { color: inherit; text-underline-offset: 0.2em; }
+
+:focus-visible {
+  outline: 3px solid var(--bullet);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px var(--ink);
+}
+
+.skip {
+  position: absolute; left: 1rem; top: -4rem;
+  background: var(--ink); color: var(--page); padding: 0.5rem 1rem;
+}
+.skip:focus { top: 1rem; }
+
+.wrap {
+  width: min(100% - 3rem, 46rem);
+  margin-inline: auto;
+}
+
+h1, h2, h3 { margin: 0; font-weight: 400; }
+
+h2 {
+  font-family: var(--display);
+  font-size: var(--s3);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+
+h3 {
+  font-size: var(--s1);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+p { margin: 0 0 1rem; }
+
+/* 顶栏 */
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding-block: 1.5rem;
+}
+.mark { font-family: var(--display); font-size: var(--s1); text-decoration: none; }
+.top nav { display: flex; gap: 1.25rem; flex-wrap: wrap; font-size: var(--s-1); }
+.top nav a { text-decoration: none; color: var(--muted); }
+.top nav a:hover { color: var(--ink); text-decoration: underline; }
+
+/* 开头介绍 */
+.intro { padding-block: 4rem 3.5rem; }
+.intro h1 {
+  font-family: var(--display);
+  font-size: var(--s4);
+  line-height: 1;
+  margin-bottom: 1.75rem;
+}
+.lede { font-size: var(--s1); line-height: 1.65; max-width: 34em; }
+.status { color: var(--muted); }
+.actions { display: flex; align-items: center; gap: 1.5rem; margin-top: 2rem; }
+
+.btn {
+  display: inline-block;
+  background: var(--ink);
+  color: var(--bullet);
+  font-family: var(--display);
+  font-size: var(--s1);
+  padding: 0.55rem 1.4rem 0.6rem;
+  border-radius: 4px;
+  text-decoration: none;
+}
+.btn:hover { background: var(--ground-2); }
+.link { font-weight: 600; }
+
+/* 游戏屏幕：整页唯一的重点，全宽的草地绿色带 */
+.screen {
+  background: var(--ground);
+  color: #e9ecdf;
+  padding-block: 4rem 3rem;
+}
+.screen-in { width: min(100% - 3rem, 72rem); margin-inline: auto; }
+.screen-head {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: end;
+  gap: 0.5rem 2.5rem;
+  margin-bottom: 1.75rem;
+}
+.screen-head h2 {
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  color: var(--bullet);
+  margin: 0;
+  line-height: 0.95;
+}
+.screen-head p { margin: 0; max-width: 30em; color: #c4cbb8; }
+
+.stage {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px #4d5c44, 0 30px 60px -30px #000;
+}
+.stage iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+.stage-start {
+  all: unset;
+  position: absolute; inset: 0;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+.stage-start img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.55) saturate(0.9); transition: filter 0.25s; }
+.stage-start:hover img { filter: brightness(0.75); }
+.stage-cta {
+  position: relative;
+  font-family: var(--display);
+  font-size: clamp(1.6rem, 4vw, 2.8rem);
+  color: var(--ink);
+  background: var(--bullet);
+  padding: 0.4rem 1.6rem 0.5rem;
+  border-radius: 4px;
+}
+.stage-start:focus-visible { outline: 4px solid var(--bullet); outline-offset: -4px; }
+
+.keys {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 2rem;
+  margin: 1.5rem 0 0;
+  font-size: var(--s-1);
+}
+.keys div { display: flex; gap: 0.6rem; align-items: baseline; }
+.keys dt {
+  font-weight: 600;
+  color: var(--ground);
+  background: #c4cbb8;
+  padding: 0 0.5rem;
+  border-radius: 3px;
+}
+.keys dd { margin: 0; color: #c4cbb8; }
+.screen-foot { margin: 1.25rem 0 0; font-size: var(--s-1); }
+.screen-foot a { color: var(--bullet); }
+
+/* 项目说明 */
+.project { padding-block: 4.5rem 1rem; }
+.facts { list-style: none; padding: 0; margin: 0 0 3.5rem; }
+.facts li {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  align-items: baseline;
+  padding-block: 0.6rem;
+  border-bottom: 1px solid var(--line);
+}
+.facts b {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: var(--s3);
+  line-height: 1;
+  color: var(--ground-2);
+}
+.project h3 { margin-bottom: 1rem; }
+.plain { padding-left: 1.2em; margin: 0 0 1.5rem; }
+.plain li { margin-bottom: 0.5rem; }
+.meta { color: var(--muted); font-size: var(--s-1); }
+
+/* 通用段落间距：只给 main 下的直属 section，避免和 .screen 冲突 */
+#skills, #exp { padding-block: 3.5rem 1rem; }
+
+.rows { margin: 0; }
+.rows div {
+  display: grid;
+  grid-template-columns: 6rem 1fr;
+  gap: 1rem;
+  padding-block: 0.75rem;
+  border-top: 1px solid var(--line);
+}
+.rows dt { color: var(--muted); }
+.rows dd { margin: 0; }
+
+/* 经历是真正的时间顺序，用竖线串起来 */
+.timeline { list-style: none; padding: 0; margin: 0; border-left: 2px solid var(--ground-2); }
+.timeline li { position: relative; padding: 0 0 2rem 1.75rem; }
+.timeline li::before {
+  content: "";
+  position: absolute; left: -7px; top: 0.55rem;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--page);
+  border: 2px solid var(--ground-2);
+}
+.timeline li:first-child::before { background: var(--ground-2); }
+.when { color: var(--muted); font-size: var(--s-1); margin-bottom: 0.25rem; }
+.timeline h3 { margin-bottom: 0.35rem; }
+
+.contact { padding-block: 3.5rem 2rem; }
+.big { font-family: var(--display); font-size: var(--s2); }
+
+.foot { padding-block: 2rem 3rem; color: var(--muted); font-size: var(--s-1); border-top: 1px solid var(--line); }
+
+@media (max-width: 640px) {
+  .top { flex-direction: column; gap: 0.5rem; }
+  .intro { padding-block: 2.5rem; }
+  .screen-head { grid-template-columns: 1fr; }
+  .rows div { grid-template-columns: 1fr; gap: 0.25rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}

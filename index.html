@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>【你的名字】的个人主页</title>
+<meta name="description" content="【你的名字】，自学前端与游戏开发。代表作：浏览器动作游戏《丧尸突围》，可在本页直接试玩。">
+<link rel="preload" href="fonts/smiley.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a class="skip" href="#main">跳到正文</a>
+
+<header class="wrap top">
+  <a class="mark" href="#">【你的名字】</a>
+  <nav aria-label="页面导航">
+    <a href="#game">作品</a>
+    <a href="#skills">技能</a>
+    <a href="#exp">经历</a>
+    <a href="#contact">联系</a>
+  </nav>
+</header>
+
+<main id="main">
+
+  <section class="wrap intro">
+    <h1>【你的名字】</h1>
+    <p class="lede">我自学写代码，喜欢把想法做成能玩、能用的东西。下面这个丧尸游戏是我从零写的，三千行原生 JavaScript，没有用游戏引擎。</p>
+    <p class="status">正在找前端开发或游戏开发的工作，可以马上到岗。</p>
+    <p class="actions">
+      <a class="btn" href="#game">试玩我的游戏</a>
+      <a class="link" href="#contact">联系我</a>
+    </p>
+  </section>
+
+  <!-- 全宽的游戏屏幕：点击后才加载 iframe，避免进页面就抢键盘和鼠标 -->
+  <section id="game" class="screen" aria-labelledby="game-title">
+    <div class="screen-in">
+      <div class="screen-head">
+        <h2 id="game-title">丧尸突围</h2>
+        <p>俯视角射击游戏。跟着无线电里的研究员林夏，穿过四张地图，打倒五只变异母体。</p>
+      </div>
+
+      <div class="stage" id="stage">
+        <button class="stage-start" id="play" type="button">
+          <img src="img/play.png" alt="游戏画面：主角站在荒野草地上，周围是丧尸和箱子，底部是林夏的对话框" width="1280" height="720">
+          <span class="stage-cta">点击开始游戏</span>
+        </button>
+      </div>
+
+      <dl class="keys" aria-label="操作方式">
+        <div><dt>WASD</dt><dd>移动</dd></div>
+        <div><dt>鼠标左键</dt><dd>射击</dd></div>
+        <div><dt>鼠标右键</dt><dd>翻滚躲避</dd></div>
+        <div><dt>1–6 / 滚轮</dt><dd>换武器</dd></div>
+        <div><dt>P / Esc</dt><dd>暂停</dd></div>
+      </dl>
+      <p class="screen-foot"><a href="zombie/index.html" target="_blank" rel="noopener">在新窗口全屏玩</a></p>
+    </div>
+  </section>
+
+  <section class="wrap project" aria-labelledby="proj-title">
+    <h2 id="proj-title">这个游戏里有什么</h2>
+    <ul class="facts">
+      <li><b>6</b> 种武器，手枪、冲锋枪、能反弹三次的激光、榴弹和会加速的导弹</li>
+      <li><b>9</b> 种丧尸，其中 5 只是 BOSS，每只有自己的攻击方式</li>
+      <li><b>4</b> 张地图：荒野草地、沙漠小镇、冰封废墟、焦土工厂</li>
+      <li><b>13</b> 种通关强化，每关三选一，比如二段闪避、飞剑环绕、嗜血</li>
+      <li><b>4</b> 只可以收养的宠物，狗、猫、鸟，还有一个幽灵</li>
+    </ul>
+
+    <h3>我是怎么做的</h3>
+    <p>整个游戏画在一块 Canvas 上，角色、丧尸、对话框头像都是用代码画的，没有用图片素材。代码按职责拆成七个文件：数值配置、丧尸 AI、武器、剧情、绘制和主循环各管一块。</p>
+    <p>所有数值都集中在一个配置文件里。想加一种新丧尸，写一条配置就行；只有它需要新的行为时，才去改 AI 文件。剧情也单独放在一个文件里，改台词不用碰游戏逻辑。</p>
+    <p>做的过程中解决过的问题：</p>
+    <ul class="plain">
+      <li>翻滚的无敌时间和连续翻滚的手感，靠调翻滚时长、冷却和"接下一次翻滚"的窗口来平衡。</li>
+      <li>污染丧尸吐毒液前会先鼓喉咙，给玩家留出反应时间。</li>
+      <li>伪 2D 视角下，子弹从枪口高度射出，墙有顶面和正面两种颜色，看起来有立体感。</li>
+    </ul>
+    <p class="meta">原生 JavaScript、HTML Canvas，无依赖、无构建步骤，浏览器直接打开就能运行。</p>
+  </section>
+
+  <section id="skills" class="wrap" aria-labelledby="skills-title">
+    <h2 id="skills-title">技能</h2>
+    <dl class="rows">
+      <div><dt>会用</dt><dd>JavaScript、HTML、CSS、Canvas 2D 绘图、Git</dd></div>
+      <div><dt>在学</dt><dd>网站部署、【其他正在学的技术】</dd></div>
+      <div><dt>工作方式</dt><dd>会用 Claude、Codex 这类 AI 工具协作写代码和做评审，自己负责拆需求和把关</dd></div>
+    </dl>
+  </section>
+
+  <section id="exp" class="wrap" aria-labelledby="exp-title">
+    <h2 id="exp-title">经历</h2>
+    <ol class="timeline">
+      <li>
+        <p class="when">2026 年</p>
+        <h3>独立开发《丧尸突围》</h3>
+        <p>从零写完一个带剧情、BOSS 和强化系统的浏览器游戏。</p>
+      </li>
+      <li>
+        <p class="when">【年份】</p>
+        <h3>【职位或学校】</h3>
+        <p>【一句话写你做了什么，最好带一个具体结果】</p>
+      </li>
+      <li>
+        <p class="when">【年份】</p>
+        <h3>【职位或学校】</h3>
+        <p>【一句话写你做了什么】</p>
+      </li>
+    </ol>
+  </section>
+
+  <section id="contact" class="wrap contact" aria-labelledby="contact-title">
+    <h2 id="contact-title">联系我</h2>
+    <p>想聊工作机会，或者玩游戏时发现了 bug，都可以发邮件给我。</p>
+    <p class="big"><a href="mailto:you@example.com">you@example.com</a></p>
+    <p>【微信号 / GitHub 链接】</p>
+  </section>
+
+</main>
+
+<footer class="wrap foot">
+  <p>这个网站也是我自己写的。</p>
+</footer>
+
+<script>
+  // 点击封面后才把游戏载入 iframe，并把焦点交给它，键盘操作马上生效
+  document.getElementById('play').addEventListener('click', () => {
+    const stage = document.getElementById('stage');
+    const frame = document.createElement('iframe');
+    frame.src = 'zombie/index.html';
+    frame.title = '丧尸突围游戏';
+    frame.allow = 'fullscreen';
+    stage.replaceChildren(frame);
+    frame.addEventListener('load', () => frame.contentWindow.focus());
+    frame.focus();
+  });
+</script>
+</body>
+</html>

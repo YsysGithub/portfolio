@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>丧尸突围</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #111; overflow: hidden; }
+  body { display: flex; align-items: center; justify-content: center; }
+  canvas { display: block; width: min(100vw, calc(100vh * 16 / 9)); height: auto; cursor: none; }
+</style>
+</head>
+<body>
+<canvas id="game" aria-label="丧尸突围游戏画面：WASD 移动，鼠标左键射击，右键翻滚"></canvas>
+<!-- 加载顺序即依赖顺序：配置 → 工具 → 武器/丧尸 → 渲染 → 核心 -->
+<script src="js/config.js"></script>
+<script src="js/util.js"></script>
+<script src="js/weapons.js"></script>
+<script src="js/zombies.js"></script>
+<script src="js/story.js"></script>
+<script src="js/render.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>
